@@ -1,7 +1,7 @@
 package HTTP::Tiny::CLI;
 
-our $DATE = '2014-11-18'; # DATE
-our $VERSION = '0.02'; # VERSION
+our $DATE = '2015-01-03'; # DATE
+our $VERSION = '0.03'; # VERSION
 
 use 5.010001;
 use strict;
@@ -145,6 +145,8 @@ sub _request {
             goto RETURN_RES;
         } elsif ($cli eq 'wget') {
             next unless defined($self->{wget_path});
+            # XXX how to disable config in wget? by feeding it empty config?
+            # XXX wget doesn't support custom HTTP request method?
             die "Sorry, using 'wget' backend not implemented yet";
         } else {
             die "Unknown/unsupported CLI program '$cli'";
@@ -190,7 +192,7 @@ HTTP::Tiny::CLI - Use CLI network client (curl/wget) with HTTP::Tiny interface
 
 =head1 VERSION
 
-This document describes version 0.02 of HTTP::Tiny::CLI (from Perl distribution HTTP-Tiny-CLI), released on 2014-11-18.
+This document describes version 0.03 of HTTP::Tiny::CLI (from Perl distribution HTTP-Tiny-CLI), released on 2015-01-03.
 
 =head1 SYNOPSIS
 
@@ -212,8 +214,8 @@ This document describes version 0.02 of HTTP::Tiny::CLI (from Perl distribution 
 
 =head1 DESCRIPTION
 
-B<NOTE: EARLY RELEASE. Many features like wget support, redirects, cookies are
-not yet implemented>.
+B<NOTE: EARLY RELEASE. Many features like wget support, redirects, post data,
+cookies are not yet implemented>.
 
 This class lets you use CLI network clients (currently C<curl> and C<wget> are
 supported) with an L<HTTP::Tiny> interface. It is an alternative you can try
@@ -258,16 +260,6 @@ Some information (like "user:password" stanza in URL) might leak because it is
 specified in command line which might be visible from B<ps> or other
 process-table tools.
 
-=head1 TODO
-
-Support various C<SSL_options> in the attributes.
-
-Support request options: trailer_callback, data_callback?
-
-Win32 support.
-
-Implement max_size.
-
 =head1 SEE ALSO
 
 L<HTTP::Tiny>
@@ -294,7 +286,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
